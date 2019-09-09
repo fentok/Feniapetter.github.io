@@ -26,6 +26,7 @@
     var naguruse = new Audio("sounds/naguru.wav");
     naguruse.volume = 0.5;
     naguruse.playbackRate = 1.5;
+    shareText = "フェニアを" + counter + "回クリックした";
 
     img1 = new Image();
     img1.src = "images/feniamodoki-0.png";
@@ -40,6 +41,7 @@
       imageDamage();
       naguruse.currentTime = 0;
       naguruse.play();
+      shareText = "フェニアを" + counter + "回クリックした";
     }
     function onfenia() {
       document.getElementById("fenia").style.width = "250px";
@@ -89,10 +91,10 @@
       var $box = $("#box");
 
       $(window).on("click", function () {
-        function setTweetButton("フェニアを"+counter + "回クリックした！");
-    });
+        function setTweetButton(shareText);
+      });
 
-    }) (this, document, $);
+    })(this, document, $);
 
 
   </script>
