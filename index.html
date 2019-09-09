@@ -26,6 +26,7 @@
     var naguruse = new Audio("sounds/naguru.wav");
     naguruse.volume = 0.5;
     naguruse.playbackRate = 1.5;
+    shareText = "フェニアを" + counter + "回クリックした！"
 
     img1 = new Image();
     img1.src = "images/feniamodoki-0.png";
@@ -40,8 +41,6 @@
       imageDamage();
       naguruse.currentTime = 0;
       naguruse.play();
-      shareText = "フェニアを" + counter + "回クリックした！";
-      setTweetButton(shareText);
     }
     function onfenia() {
       document.getElementById("fenia").style.width = "250px";
@@ -74,8 +73,6 @@
     fenia.onmouseover = onfenia;
     fenia.onmouseout = outfenia;
 
-
-
     function setTweetButton(text) {
       $('#tweet-area').empty(); //既存のボタン消す
       // htmlでスクリプトを読んでるからtwttがエラーなく呼べる
@@ -91,6 +88,10 @@
         }
       );
     }
+
+    $(window).load(function () {
+      setTweetButton(shareText)
+    });
 
 
   </script>
