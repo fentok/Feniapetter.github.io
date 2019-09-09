@@ -26,7 +26,6 @@
     var naguruse = new Audio("sounds/naguru.wav");
     naguruse.volume = 0.5;
     naguruse.playbackRate = 1.5;
-    shareText = "フェニアを" + counter + "回クリックした！"
 
     img1 = new Image();
     img1.src = "images/feniamodoki-0.png";
@@ -90,7 +89,7 @@
       var $box = $("#box");
 
       $(window).on("click", function () {
-        function setTweetButton(shareText)
+        function setTweetButton("フェニアを#{counter}回クリックした！");
       });
 
     })(this, document, $);
