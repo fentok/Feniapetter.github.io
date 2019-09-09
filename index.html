@@ -40,7 +40,7 @@
       imageDamage();
       naguruse.currentTime = 0;
       naguruse.play();
-      setTweetButton();
+      setTweetButton(shareText);
     }
     function onfenia() {
       document.getElementById("fenia").style.width = "250px";
@@ -76,7 +76,7 @@
     shareText = "フェニアを" + counter + "回クリックした！";
 
 
-    function setTweetButton() {
+    function setTweetButton(text) {
       $('#tweet-area').empty(); //既存のボタン消す
       // htmlでスクリプトを読んでるからtwttがエラーなく呼べる
       // オプションは公式よんで。
