@@ -88,9 +88,7 @@
     fenia.onmouseout = outfenia;
 
 
-    $(window).on("click", function () {
-      setTweetButton(shareText);
-    });
+    window.onclick = setTweetButton(shareText);
 
 
   </script>
