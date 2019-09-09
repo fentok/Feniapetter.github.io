@@ -41,7 +41,6 @@
       imageDamage();
       naguruse.currentTime = 0;
       naguruse.play();
-      shareText = "フェニアを" + counter + "回クリックした";
     }
     function onfenia() {
       document.getElementById("fenia").style.width = "250px";
@@ -88,7 +87,7 @@
     fenia.onmouseout = outfenia;
 
 
-    window.onclick = setTweetButton(shareText);
+    window.onclick = setTweetButton("フェニアを" + counter + "回クリックした");
 
 
   </script>
