@@ -40,6 +40,7 @@
       imageDamage();
       naguruse.currentTime = 0;
       naguruse.play();
+      shareText = "フェニアを" + counter + "回クリックした！";
       setTweetButton(shareText);
     }
     function onfenia() {
@@ -73,7 +74,6 @@
     fenia.onmouseover = onfenia;
     fenia.onmouseout = outfenia;
 
-    shareText = "フェニアを" + counter + "回クリックした！";
 
 
     function setTweetButton(text) {
@@ -85,7 +85,7 @@
         document.getElementById("tweet-area"),
         {
           size: "large", //ボタンはでかく
-          text: shareText, // 狙ったテキスト
+          text: text, // 狙ったテキスト
           hashtags: "フェニアクリッカー", // ハッシュタグ
           url: "https://fentok.github.io/" // URL
         }
