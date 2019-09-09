@@ -5,6 +5,7 @@
   <title>フェニアクリッカー</title>
   <link rel="stylesheet" href="style.css">
   <meta charset="utf-8" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 
 <body>
@@ -15,9 +16,10 @@
   <p id="feniabody">
     <img id="fenia" src="images/feniamodoki-0.png" width="240" height="240">
   </p>
-  <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a>
-  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-  </a>
+  <div id="tweet-area">
+    <!-- ここにボタンができる-->
+  </div>
+  <script src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
   <script>
     var fenia = document.getElementById("fenia");
     var counter = 0;
@@ -38,6 +40,7 @@
       imageDamage();
       naguruse.currentTime = 0;
       naguruse.play();
+      setTweetButton(shareText);
     }
     function onfenia() {
       document.getElementById("fenia").style.width = "250px";
@@ -69,6 +72,27 @@
     fenia.onclick = feniaclick;
     fenia.onmouseover = onfenia;
     fenia.onmouseout = outfenia;
+
+    shareText = "フェニアを" + count + "回クリックした！"
+
+
+    function setTweetButton(text) {
+      $('#tweet-area').empty(); //既存のボタン消す
+      // htmlでスクリプトを読んでるからtwttがエラーなく呼べる
+      // オプションは公式よんで。
+      twttr.widgets.createShareButton(
+        "",
+        document.getElementById("tweet-area"),
+        {
+          size: "large", //ボタンはでかく
+          text: text, // 狙ったテキスト
+          hashtags: "フェニアクリッカー", // ハッシュタグ
+          url: "https://fentok.github.io/" // URL
+        }
+      );
+    }
+
+
   </script>
 </body>
 
