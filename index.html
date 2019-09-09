@@ -14,12 +14,13 @@
   <p id="countNum">0
   </p>
   <p id="feniabody">
-    <img id="fenia" src="images/feniamodoki-0.png" width="240" height="240">
+    <img id="fenia" src="images/feniamodoki-0.png" onselectstart="return false;" onmousedown="return false;" width="240" height="240">
   </p>
-  <div id="tweet-area">
-    <!-- ここにボタンができる-->
+  <div id="box">
+    <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://fentok.github.io/" data-text="" data-lang="ja"
+      data-size="large">ツイート</a>
   </div>
-  <script src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   <script>
     var fenia = document.getElementById("fenia");
     var counter = 0;
@@ -73,25 +74,18 @@
     fenia.onmouseover = onfenia;
     fenia.onmouseout = outfenia;
 
-    function setTweetButton(text) {
-      $('#tweet-area').empty(); //既存のボタン消す
-      // htmlでスクリプトを読んでるからtwttがエラーなく呼べる
-      // オプションは公式よんで。
-      twttr.widgets.createShareButton(
-        "",
-        document.getElementById("tweet-area"),
-        {
-          size: "large", //ボタンはでかく
-          text: text, // 狙ったテキスト
-          hashtags: "フェニアクリッカー", // ハッシュタグ
-          url: "https://fentok.github.io/" // URL
-        }
-      );
-    }
+    (function (win, doc, $) {
+      var $box = $("#box");
 
-    $(function () {
-      setTweetButton(shareText)
-    });
+      $(window).on("click", function () {
+        var $widget = $("#twitter-widget-0"),
+          src = $widget.attr("src"),
+          url = src.replace(/\&text=.*\&/, "&text=" + encodeURIComponent(shareText + "&"));
+        $widget.attr({ src: url });
+        $box.html("").append($widget);
+      });
+
+    })(this, document, $);
 
 
   </script>
