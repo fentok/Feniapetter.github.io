@@ -1,94 +1,113 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>フェニアクリッカー</title>
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"
+    />
+  </head>
 
-<head>
-  <title>フェニアクリッカー</title>
-  <link rel="stylesheet" href="style.css">
-  <meta charset="utf-8" />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-</head>
+  <body>
+    <h1>フェニアクリッカー</h1>
+    <h2>-Fenia Clicker-</h2>
+    <p id="countNum">0</p>
+    <p id="feniabody">
+      <img
+        id="fenia"
+        src="images/feniamodoki-0.png"
+        onselectstart="return false;"
+        onmousedown="return false;"
+        width="240"
+        height="240"
+      />
+    </p>
+    <div id="tweet-area">
+      <!-- ここにボタンができる-->
+    </div>
+    <script src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <script>
+      var fenia = document.getElementById("fenia");
+      var counter = 0;
+      var naguruse = new Audio("sounds/naguru.wav");
+      naguruse.volume = 0.5;
+      naguruse.playbackRate = 1.5;
+      shareText = "フェニアを" + counter + "回クリックした";
 
-<body>
-  <h1>フェニアクリッカー</h1>
-  <h2>-Fenia Clicker-</h2>
-  <p id="countNum">0
-  </p>
-  <p id="feniabody">
-    <img id="fenia" src="images/feniamodoki-0.png" onselectstart="return false;" onmousedown="return false;" width="240" height="240">
-  </p>
-  <div id="tweet-area">
-    <!-- ここにボタンができる-->
-  </div>
-  <script src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-  <script>
-    var fenia = document.getElementById("fenia");
-    var counter = 0;
-    var naguruse = new Audio("sounds/naguru.wav");
-    naguruse.volume = 0.5;
-    naguruse.playbackRate = 1.5;
-    shareText = "フェニアを" + counter + "回クリックした";
+      img1 = new Image();
+      img1.src = "images/feniamodoki-0.png";
+      img2 = new Image();
+      img2.src = "images/feniamodoki-2.png";
 
-    img1 = new Image();
-    img1.src = "images/feniamodoki-0.png";
-    img2 = new Image();
-    img2.src = "images/feniamodoki-2.png";
+      // フェニアをクリック
+      function feniaclick() {
+        counter += 1;
+        document.getElementById("countNum").textContent = counter;
+        setTimeout(imageInit, 100);
+        imageDamage();
+        naguruse.currentTime = 0;
+        naguruse.play();
+        setTweetButton("フェニアを" + counter + "回クリックした");
+      }
+      function onfenia() {
+        document.getElementById("fenia").style.width = "250px";
+        document.getElementById("fenia").style.height = "250px";
+        document.getElementById("fenia").style.cursor = "pointer";
+      }
 
-    // フェニアをクリック
-    function feniaclick() {
-      counter += 1;
-      document.getElementById("countNum").textContent = counter;
-      setTimeout(imageInit, 100);
-      imageDamage();
-      naguruse.currentTime = 0;
-      naguruse.play();
-      setTweetButton("フェニアを" + counter + "回クリックした");
-    }
-    function onfenia() {
-      document.getElementById("fenia").style.width = "250px";
-      document.getElementById("fenia").style.height = "250px";
-      document.getElementById("fenia").style.cursor = "pointer";
-    }
+      function outfenia() {
+        document.getElementById("fenia").style.width = "240px";
+        document.getElementById("fenia").style.height = "240px";
+      }
+      function updatecount() {
+        document.getElementById("countNum").text = counter;
+      }
 
-    function outfenia() {
-      document.getElementById("fenia").style.width = "240px";
-      document.getElementById("fenia").style.height = "240px";
-    }
-    function updatecount() {
-      document.getElementById("countNum").text = counter;
+      function imageDamage() {
+        document.getElementById("fenia").src = img2.src;
+        document.getElementById("fenia").style.width = "230px";
+        document.getElementById("fenia").style.height = "230px";
+      }
 
-    }
+      function imageInit() {
+        document.getElementById("fenia").src = img1.src;
+        document.getElementById("fenia").style.width = "250px";
+        document.getElementById("fenia").style.height = "250px";
+      }
 
-    function imageDamage() {
-      document.getElementById("fenia").src = img2.src;
-      document.getElementById("fenia").style.width = "230px";
-      document.getElementById("fenia").style.height = "230px";
-    }
-
-    function imageInit() {
-      document.getElementById("fenia").src = img1.src;
-      document.getElementById("fenia").style.width = "250px";
-      document.getElementById("fenia").style.height = "250px";
-    }
-    function setTweetButton(text) {
-      $('#tweet-area').empty();
-      twttr.widgets.createShareButton(
-        "",
-        document.getElementById("tweet-area"),
-        {
-          size: "large", //ボタンはでかく
-          text: text, // 狙ったテキスト
-          hashtags: "フェニアクリッカー", // ハッシュタグ
-          url: "//url" // URL
-        }
+      let lastTouch = 0;
+      document.addEventListener(
+        "touchend",
+        event => {
+          const now = window.performance.now();
+          if (now - lastTouch <= 500) {
+            event.preventDefault();
+          }
+          lastTouch = now;
+        },
+        true
       );
-    }
 
-    fenia.onclick = feniaclick;
-    fenia.onmouseover = onfenia;
-    fenia.onmouseout = outfenia;
+      function setTweetButton(text) {
+        $("#tweet-area").empty();
+        twttr.widgets.createShareButton(
+          "",
+          document.getElementById("tweet-area"),
+          {
+            size: "large", //ボタンはでかく
+            text: text, // 狙ったテキスト
+            hashtags: "フェニアクリッカー", // ハッシュタグ
+            url: "//url" // URL
+          }
+        );
+      }
 
-
-  </script>
-</body>
-
+      fenia.onclick = feniaclick;
+      fenia.onmouseover = onfenia;
+      fenia.onmouseout = outfenia;
+    </script>
+  </body>
 </html>
